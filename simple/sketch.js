@@ -8,7 +8,6 @@ let greenValue = 0;
 function setup() {
   createCanvas(300, 300);
   initUi();
-  updateSerialConnection();
 }
 
 function draw() {

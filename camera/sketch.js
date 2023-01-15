@@ -1,6 +1,7 @@
 let serial;
 let portSelect;
 const pixelNum = 10;
+let bgColor;
 
 function setup() {
   createCanvas(300, 300);
@@ -11,9 +12,12 @@ function setup() {
 
   capture = createCapture(VIDEO);
   capture.hide();
+
+  bgColor = color(0, 0, 0);
 }
 
 function draw() {
+  background(bgColor);
 }
 
 function keyPressed() {
@@ -21,17 +25,18 @@ function keyPressed() {
   img.loadPixels();
   const size = 50;
   const croppedImage = img.get(
-    img.pixels.width / 2 - size / 2, img.pixels.height / 2 - size / 2,
+    img.width / 2 - size / 2,
+    img.height / 2 - size / 2,
     size, size
   );
   croppedImage.loadPixels();
-  const redValue = 0;
-  const greenValue = 0;
-  const blueValue = 0;
+  let redValue = 0;
+  let greenValue = 0;
+  let blueValue = 0;
   for (let i = 0; i < croppedImage.pixels.length; i++) {
-    redValue += red(croppedImage.pixels);
-    greenValue += green(croppedImage.pixels);
-    blueValue += blue(croppedImage.pixels);
+    redValue += red(croppedImage.pixels[i]);
+    greenValue += green(croppedImage.pixels[i]);
+    blueValue += blue(croppedImage.pixels[i]);
   }
   redValue /= croppedImage.pixels.length;
   greenValue /= croppedImage.pixels.length;
@@ -39,6 +44,7 @@ function keyPressed() {
   for (let i = 0; i < pixelNum; i++) {
     sendPixelData(i, redValue, greenValue, blueValue);
   }
+  bgColor = color(redValue, greenValue, blueValue);
 }
 
 function gotList(portList) {

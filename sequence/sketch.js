@@ -1,9 +1,8 @@
 let serial;
-let hostNameInput, portNumberInput, portSelect, updateSerialConnectionButton;
-const pixelNum = 10;
 let redValue = 0;
 let greenValue = 0;
-
+const pixelNum = 10;
+let hostNameInput, portNumberInput, portSelect, updateSerialConnectionButton;
 
 function setup() {
   createCanvas(300, 300);

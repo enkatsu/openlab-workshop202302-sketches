@@ -3,13 +3,15 @@ let portSelect;
 let redValue = 0;
 let greenValue = 0;
 const pixelNum = 10;
+let hostNameInput, portNumberInput, updateSerialConnectionButton;
 
 function setup() {
   createCanvas(300, 300);
-  serial = new p5.SerialPort();
-  serial.list();
-  serial.on('list', gotList);
-  serial.on('data', gotData);
+  hostNameInput = createInput('localhost');
+  portNumberInput = createInput('8081');
+  updateSerialConnectionButton = createButton('update serial connection');
+  updateSerialConnectionButton.mousePressed(updateSerialConnection);
+  updateSerialConnection();
 }
 
 function draw() {
@@ -30,6 +32,17 @@ function touchMoved() {
   for (let i = 0; i < pixelNum; i++) {
     sendPixelData(i, redValue, greenValue, 0);
   }
+}
+
+function updateSerialConnection() {
+  if (serial && serial.isConnected()) {
+    serial.closePort();
+  }
+
+  serial = new p5.SerialPort(hostNameInput.value(), portNumberInput.value());
+  serial.list();
+  serial.on('list', gotList);
+  serial.on('data', gotData);
 }
 
 function gotList(portList) {

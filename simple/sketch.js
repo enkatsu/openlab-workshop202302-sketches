@@ -34,7 +34,8 @@ function initUi() {
   hostNameInput = createInput('localhost');
   portNumberInput = createInput(8081, 'number');
   updateSerialConnectionButton = createButton('update serial connection');
-  updateSerialConnectionButton.mousePressed(updateSerialConnection);
+  updateSerialConnectionButton.mouseClicked(updateSerialConnection);
+  updateSerialConnectionButton.touchEnded(updateSerialConnection);
   portSelect = createSelect();
   portSelect.changed(function() {
     serial.openPort(this.selected());

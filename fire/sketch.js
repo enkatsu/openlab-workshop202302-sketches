@@ -20,13 +20,20 @@ function draw() {
     const rad = TWO_PI / 10 * i;
     const n = cyclicNoise(rad, frameCount * 0.01);
     const x = cos(rad) *  radius * n + width / 2;
-    const y = sin(rad) *  radius * n + height / 2;
+    const y = sin(rad) *  radius * n + height / 2
+    const c = fireColor(n);
+    sendPixelData(i, red(c), green(c), blue(c));
+    fill(c);
     ellipse(x, y, 3, 3);
-    const redValue = map(n, 0, 1, 127, 255);
-    const greenValue = map(n, 0, 1, 0, 255);
-    const blueValue = map(n, 0, 1, 0, 255);
-    sendPixelData(i, redValue, greenValue, blueValue);
   }
+}
+
+function fireColor(v) {
+  return color(
+    map(v, 0, 1, 127, 255),
+    map(v, 0, 1, 64, 192),
+    map(v, 0, 1, 0, 127),
+  )
 }
 
 /**

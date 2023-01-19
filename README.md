@@ -43,8 +43,9 @@ ifconfig | grep 'inet '
 
 ### WebSocketについて
 
-httpsのWebページはwsでは接続できない。
+HTTPSのWebページではwsで通信できない。
 この場合は、wssを使用する必要がある。
+今回は、ローカルでHTTPサーバを立てるので問題ない。
 
 ### GitHub Pages URL
 

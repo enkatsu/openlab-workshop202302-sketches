@@ -1,14 +1,9 @@
-let serial;
-let portSelect;
 const pixelNum = 10;
 let bgColor;
 
 function setup() {
   createCanvas(300, 300);
-  serial = new p5.SerialPort();
-  serial.list();
-  serial.on('list', gotList);
-  serial.on('data', gotData);
+  initUi();
 
   capture = createCapture(VIDEO);
   capture.hide();
@@ -45,30 +40,4 @@ function keyPressed() {
     sendPixelData(i, redValue, greenValue, blueValue);
   }
   bgColor = color(redValue, greenValue, blueValue);
-}
-
-function gotList(portList) {
-  portSelect = createSelect();
-  for (let port of portList) {
-    portSelect.option(port);
-  }
-
-  portSelect.changed(function() {
-    serial.openPort(this.selected());
-  });
-
-  serial.openPort(portSelect.selected());
-}
-
-function gotData() {
-  let currentString = serial.readLine();
-  console.log(currentString);
-}
-
-function sendPixelData(i, r, g, b) {
-  serial.write(parseInt(i));
-  serial.write(parseInt(r));
-  serial.write(parseInt(g));
-  serial.write(parseInt(b));
-  serial.write('\n');
 }

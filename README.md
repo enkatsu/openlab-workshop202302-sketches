@@ -39,6 +39,7 @@ ifconfig | grep 'inet '
 ブラウザから http://${IP_ADDRESS}:8000 にアクセスする。
 
 IPアドレスとポート番号を入力して、「update serial connection」をクリックする。
+上記の手順で進めている場合は、IPアドレスは `localhost` ポート番号は `8081` のままで進めていい。
 右のセレクトボックスからArduinoの接続先ポートを選択すると通信が開始される。
 
 ![screenshot.png](screenshot.png)

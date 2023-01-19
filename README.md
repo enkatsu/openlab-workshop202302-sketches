@@ -22,11 +22,30 @@ node startserver.js
 
 ```bash
 git clone https://github.com/enkatsu/openlab-workshop202302-sketches.git
-python -m http.server
+cd openlab-workshop202302-sketches
+python -m http.server 8000
 ```
 
 [http://localhost:8000](http://localhost:8000)
 
-## GitHub Pages URL
+#### スマートフォンから開く
+
+p5.serialserverを起動しているマシンのIPアドレスを確認する。
+
+```bash
+ifconfig | grep 'inet '
+```
+
+ブラウザから http://${IP_ADDRESS}:8000 にアクセスする。
+
+
+## メモ
+
+### WebSocketについて
+
+httpsのWebページはwsでは接続できない。
+この場合は、wssを使用する必要がある。
+
+### GitHub Pages URL
 
 [sketches](https://enkatsu.github.io/openlab-workshop202302-sketches/)

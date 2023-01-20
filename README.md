@@ -11,6 +11,7 @@
 ```bash
 git clone https://github.com/p5-serial/p5.serialserver.git
 cd p5.serialserver
+npm install
 node startserver.js
 ```
 

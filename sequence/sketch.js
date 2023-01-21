@@ -34,7 +34,7 @@ function draw() {
 
       const w = width / sequence.length;
       const h = height / pixels.length;
-      rect(w * i + 1, h * j + 1, w - 1, h - 1);
+      rect(w * i + 1 * i, h * j + 1 * j, w - 1, h - 1);
     }
   }
 

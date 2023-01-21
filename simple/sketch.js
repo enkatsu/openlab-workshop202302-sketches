@@ -1,4 +1,3 @@
-const pixelNum = 10;
 let redValue = 0;
 let greenValue = 0;
 

@@ -1,4 +1,3 @@
-const pixelNum = 10;
 let bgColor;
 
 function setup() {

@@ -1,4 +1,3 @@
-const pixelNum = 10;
 
 function setup() {
   createCanvas(300, 300);

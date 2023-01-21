@@ -1,4 +1,3 @@
-const pixelNum = 10;
 let pixelBrightness = 0;
 
 function setup() {

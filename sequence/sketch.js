@@ -11,7 +11,8 @@ const sequence = [
 let current = 0;
 
 function setup() {
-  createCanvas(300, 300);
+  const canvasSize = min([windowWidth - 15, windowHeight - 15, 600]);
+  createCanvas(canvasSize, canvasSize);
   initUi();
 }
 

@@ -1,4 +1,3 @@
-let bgColor;
 
 function setup() {
   const canvasSize = min([windowWidth - 15, windowHeight - 15, 600]);
@@ -7,15 +6,13 @@ function setup() {
 
   capture = createCapture(VIDEO);
   capture.hide();
-
-  bgColor = color(0, 0, 0);
 }
 
 function draw() {
-  background(bgColor);
-}
+  if (!serial) {
+    return;
+  }
 
-function keyPressed() {
   const img = capture.get();
   img.loadPixels();
   const size = 50;
@@ -24,20 +21,37 @@ function keyPressed() {
     img.height / 2 - size / 2,
     size, size
   );
-  croppedImage.loadPixels();
-  let redValue = 0;
-  let greenValue = 0;
-  let blueValue = 0;
-  for (let i = 0; i < croppedImage.pixels.length; i++) {
-    redValue += red(croppedImage.pixels[i]);
-    greenValue += green(croppedImage.pixels[i]);
-    blueValue += blue(croppedImage.pixels[i]);
+  const aveColor = averageColor(croppedImage);
+  if (frameCount % 10 == 0) {
+    for (let i = 0; i < pixelNum; i++) {
+      const isLast = i === (pixelNum - 1);
+      sendPixelData(i, red(aveColor), green(aveColor), blue(aveColor), isLast ? 1 : 0);
+    }
   }
-  redValue /= croppedImage.pixels.length;
-  greenValue /= croppedImage.pixels.length;
-  blueValue /= croppedImage.pixels.length;
-  for (let i = 0; i < pixelNum; i++) {
-    sendPixelData(i, redValue, greenValue, blueValue);
+
+  const ratio = width / height;
+  const w = ratio > 0 ? width : img.width * ratio;
+  const h = ratio > 0 ? img.height * ratio: height;
+  image(img, 0, 0, w, h);
+  fill(aveColor);
+  rect(img.width / 2 - size / 2, img.height / 2 - size / 2, size, size);
+  image(croppedImage, 0, 0);
+}
+
+function averageColor(img) {
+  img.loadPixels();
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  for (let y = 0; y < img.height; y++) {
+    for (let x = 0; x < img.width; x++) {
+      r += red(img.get(x, y));
+      g += green(img.get(x, y));
+      b += blue(img.get(x, y));
+    }
   }
-  bgColor = color(redValue, greenValue, blueValue);
+  r /= img.width * img.height;
+  g /= img.width * img.height;
+  b /= img.width * img.height;
+  return color(r, g, b);
 }

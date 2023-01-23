@@ -8,27 +8,24 @@ function setup() {
 function draw() {
   background(0);
   noStroke();
-  const radius = 50;
+  const radius = 300;
   for (let i = 0; i < 10; i++) {
     const rad = TWO_PI / 10 * i;
     const n = cyclicNoise(rad, frameCount * 0.01);
     const x = cos(rad) *  radius * n + width / 2;
     const y = sin(rad) *  radius * n + height / 2
     const c = fireColor(n);
-    if (serial) {
-      sendPixelData(i, red(c), green(c), blue(c));
-    }    
+    if (serial && frameCount % 10 == 0) {
+      const isLast = i === (pixelNum - 1);
+      sendPixelData(i, red(c), green(c), blue(c), isLast ? 1: 0);
+    }
     fill(c);
-    ellipse(x, y, 3, 3);
+    ellipse(x, y, 10, 10);
   }
 }
 
 function fireColor(v) {
-  return color(
-    map(v, 0, 1, 127, 255),
-    map(v, 0, 1, 64, 192),
-    map(v, 0, 1, 0, 127),
-  )
+  return color(map(v, 0, 1, 0, 255), 0, 0)
 }
 
 /**

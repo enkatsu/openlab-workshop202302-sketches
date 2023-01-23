@@ -11,7 +11,7 @@ void setup() {
   pixels.begin();
   pixels.clear();
   pixels.show();
-//  pixels.setBrightness(50);
+  pixels.setBrightness(50);
 
   Serial.begin(9600);
 }

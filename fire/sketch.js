@@ -15,7 +15,7 @@ function draw() {
     const x = cos(rad) *  radius * n + width / 2;
     const y = sin(rad) *  radius * n + height / 2
     const c = fireColor(n);
-    if (serial && frameCount % 10 == 0) {
+    if (frameCount % 10 == 0) {
       const isLast = i === (pixelNum - 1);
       sendPixelData(i, red(c), green(c), blue(c), isLast ? 1: 0);
     }

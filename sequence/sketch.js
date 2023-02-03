@@ -45,13 +45,12 @@ function draw() {
       current = 0;
     }
 
-    if (serial) {
-      for (let i = 0; i < sequence[current].length; i++) {
-        if (sequence[current][i]) {
-          sendPixelData(i, 255, 255, 255);
-        } else {
-          sendPixelData(i, 0, 0, 0);
-        }
+    for (let i = 0; i < sequence[current].length; i++) {
+      const isLast = i === (pixelNum - 1);
+      if (sequence[current][i]) {
+        sendPixelData(i, 255, 255, 255, isLast ? 1: 0);
+      } else {
+        sendPixelData(i, 0, 0, 0, isLast ? 1: 0);
       }
     }
   }

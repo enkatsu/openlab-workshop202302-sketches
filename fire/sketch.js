@@ -25,11 +25,17 @@ function draw() {
   }
 }
 
+/**
+ * 炎っぽい色を返す
+ * @param {*} v 
+ * @returns 
+ */
 function fireColor(v) {
   return color(map(v, 0, 1, 0, 255), map(v, 0, 1, 0, 64), 0);
 }
 
 /**
+ * 周期的パーリンノイズ 
  * 参考文献: https://note.com/deconbatch/n/nc14219bfacc6
  * @param {*} rad 
  * @param {*} t 

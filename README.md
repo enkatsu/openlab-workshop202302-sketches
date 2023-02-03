@@ -53,7 +53,3 @@ IPアドレスとポート番号を入力して、「update serial connection」
 HTTPSのWebページではwsで通信できない。
 この場合は、wssを使用する必要がある。
 今回は、ローカルでHTTPサーバを立てるので問題ない。
-
-### GitHub Pages URL
-
-[sketches](https://enkatsu.github.io/openlab-workshop202302-sketches/)

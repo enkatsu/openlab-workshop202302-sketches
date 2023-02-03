@@ -11,11 +11,12 @@ function draw() {
   const radius = 300;
   for (let i = 0; i < 10; i++) {
     const rad = TWO_PI / 10 * i;
-    const n = cyclicNoise(rad, frameCount * 0.01);
+    const n = cyclicNoise(rad, frameCount * 0.02);
     const x = cos(rad) *  radius * n + width / 2;
     const y = sin(rad) *  radius * n + height / 2
     const c = fireColor(n);
-    if (frameCount % 10 == 0) {
+    
+    if (frameCount % 5 == 0) {
       const isLast = i === (pixelNum - 1);
       sendPixelData(i, red(c), green(c), blue(c), isLast ? 1: 0);
     }
@@ -25,7 +26,7 @@ function draw() {
 }
 
 function fireColor(v) {
-  return color(map(v, 0, 1, 0, 255), 0, 0)
+  return color(map(v, 0, 1, 0, 255), map(v, 0, 1, 0, 64), 0);
 }
 
 /**

@@ -13,12 +13,11 @@ void setup() {
   strip.setBrightness(50);
 
   Serial.begin(9600);
-
-  pinMode(13, OUTPUT);
 }
 
 void loop() {
   byte buf[5] = {0, 0, 0, 0, 0};
+  // 「5byteのデータがくる」 or 「タイムアウトする」 or 「\nが来る」 まで buf に読み込む
   int len = Serial.readBytesUntil('\n', buf, 5);
   if (len != 5) {
     return;
@@ -29,7 +28,6 @@ void loop() {
   int green = buf[2];
   int blue = buf[3];
   int command = buf[4];
-  Serial.write(command);
   strip.setPixelColor(index, strip.Color(red, green, blue));
   if (command == 1) {
     strip.show();

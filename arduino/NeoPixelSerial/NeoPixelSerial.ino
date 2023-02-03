@@ -17,7 +17,9 @@ void setup() {
 
 void loop() {
   byte buf[5] = {0, 0, 0, 0, 0};
-  // 「5byteのデータがくる」 or 「タイムアウトする」 or 「\nが来る」 まで buf に読み込む
+  // 「5byteのデータがくる」 or
+  // 「タイムアウトする」 or
+  // 「\nが来る」 まで buf に読み込む
   int len = Serial.readBytesUntil('\n', buf, 5);
   if (len != 5) {
     return;

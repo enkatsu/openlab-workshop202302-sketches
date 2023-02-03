@@ -8,6 +8,8 @@ function setup() {
 
 function draw() {
   background(pixelBrightness);
+  fill(255);
+  text(pixelBrightness, 100, 100)
 }
 
 function deviceShaken() {

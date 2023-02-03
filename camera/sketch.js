@@ -1,20 +1,18 @@
-
 function setup() {
   const canvasSize = min([windowWidth - 15, windowHeight - 15, 600]);
   createCanvas(canvasSize, canvasSize);
   initUi();
 
   capture = createCapture(VIDEO);
+  capture.elt.setAttribute('playsinline', '');
   capture.hide();
 }
 
 function draw() {
-  if (!serial) {
-    return;
-  }
-
   const img = capture.get();
   img.loadPixels();
+  
+  // 画像の中心 50 x 50ピクセルを切り出す
   const size = 50;
   const croppedImage = img.get(
     img.width / 2 - size / 2,
@@ -38,6 +36,11 @@ function draw() {
   image(croppedImage, 0, 0);
 }
 
+/**
+ * 画像の平均色を計算する
+ * @param {*} img 
+ * @returns 
+ */
 function averageColor(img) {
   img.loadPixels();
   let r = 0;

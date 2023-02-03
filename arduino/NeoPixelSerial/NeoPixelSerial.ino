@@ -5,37 +5,33 @@
 
 #define PIN        6
 #define NUMPIXELS 10
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  pixels.begin();
-  pixels.clear();
-  pixels.show();
-  pixels.setBrightness(50);
+  strip.begin();
+  strip.show();
+  strip.setBrightness(50);
 
   Serial.begin(9600);
+
+  pinMode(13, OUTPUT);
 }
 
 void loop() {
-  if (Serial.available() <= 0) {
-    return;
-  }
-
-  String input = Serial.readStringUntil('\n');
-  if (input.length() != 5) {
-    return;
-  }
-
   byte buf[5] = {0, 0, 0, 0, 0};
-  input.getBytes(buf, 5);
-  uint16_t i = int(buf[0]);
-  uint8_t r = int(buf[1]);
-  uint8_t g = int(buf[2]);
-  uint8_t b = int(buf[3]);
-  byte command = buf[4];
-  pixels.setPixelColor(i, pixels.Color(r, g, b));
-  pixels.show();
+  int len = Serial.readBytesUntil('\n', buf, 5);
+  if (len != 5) {
+    return;
+  }
+
+  int index = buf[0];
+  int red = buf[1];
+  int green = buf[2];
+  int blue = buf[3];
+  int command = buf[4];
+  Serial.write(command);
+  strip.setPixelColor(index, strip.Color(red, green, blue));
   if (command == 1) {
-    pixels.show();
+    strip.show();
   }
 }

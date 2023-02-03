@@ -21,6 +21,9 @@ function draw() {
   }
 }
 
+/**
+ * マウスがクリックされた時に実行される
+*/
 function mousePressed() {
   const size = width / pixelNum;
   for (let i = 0; i < pixelNum; i++) {
@@ -28,6 +31,8 @@ function mousePressed() {
     const y = height / 2 - size / 2;
     const w = size;
     const h = size;
+    // i番目の四角の中にマウスカーソルがあったら、
+    // states[i]を反転してピクセルの情報を送信する。
     if (x <= mouseX && mouseX <= x + w && y <= mouseY && mouseY <= y + h) {
       states[i] = !states[i];
       const b = states[i] ? 255: 0;

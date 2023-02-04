@@ -3,9 +3,8 @@ let img;
 function setup() {
   const canvasSize = min([windowWidth - 15, windowHeight - 15, 600]);
   createCanvas(canvasSize, canvasSize);
+  createFileInput(handleFile);
   initUi();
-
-  input = createFileInput(handleFile);
 }
 
 function draw() {
@@ -50,7 +49,6 @@ function handleFile(file) {
   print(file);
   if (file.type === 'image') {
     img = loadImage(file.data, '');
-    // img.hide();
   } else {
     img = null;
   }
